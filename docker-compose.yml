@@ -1,0 +1,22 @@
+version: "3.1"
+services:
+  api:
+    build: .
+    ports:
+      - 3090:3090
+    volumes:
+      - ./:/vi
+    environment:
+      NODE_ENV: development
+      PORT: 3090
+      REDIS_URL: redis://redis
+      API_KEY: ac505a02032a33d65dd28b41f72182e1
+      BASE_URL: https://api.themoviedb.org/3
+  redis:
+    image: redis:5.0-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - vicache:/data
+volumes:
+  vicache:
